@@ -1,5 +1,7 @@
 package com.example.justrun.stuff
 
+import android.graphics.Color
+
 object Constants {
 
     const val REQUEST_CODE_LOCATION = 0
@@ -13,4 +15,11 @@ object Constants {
     const val NOTIFICATION_ID= 1
 
     const val ACTION_SHOW_TRACKING_ACTIVITY="ACTION_SHOW_TRACKING_ACTIVITY"
+
+    const val LOCATION_UPDATE_INTERVAL= 5000L
+    const val LOCATION_FAST_INTERAL=500L
+
+    const val POLYLINE_COLOR= Color.RED
+    const val POLYLINE_WIDTH=8f
+    const val MAP_ZOOM=19f
 }
