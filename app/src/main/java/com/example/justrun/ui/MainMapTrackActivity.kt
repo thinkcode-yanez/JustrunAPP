@@ -1,6 +1,7 @@
 package com.example.justrun.ui
 
 import android.Manifest
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,6 +14,8 @@ import com.example.justrun.R
 import com.example.justrun.config.RunApp.Companion.db
 import com.example.justrun.config.db.Run
 import com.example.justrun.databinding.ActivityMainBinding
+import com.example.justrun.services.TrackingService
+import com.example.justrun.stuff.Constants.ACTION_START_OR_RESUME_SERVICE
 import com.example.justrun.stuff.Constants.REQUEST_CODE_LOCATION
 import com.example.justrun.stuff.TrackingUtility
 import com.example.justrun.viewmodels.MainViewModel
@@ -42,6 +45,9 @@ class MainMapTrackActivity : AppCompatActivity(), EasyPermissions.PermissionCall
         binding.mapView.onCreate(savedInstanceState)
         binding.mapView.getMapAsync { map = it }
 
+        binding.btnToggleRun.setOnClickListener {
+            sendComandService(ACTION_START_OR_RESUME_SERVICE)
+        }
 
         //test
         //  val run= Run(10L,65f,100,1000L)
@@ -54,6 +60,12 @@ class MainMapTrackActivity : AppCompatActivity(), EasyPermissions.PermissionCall
          }*/
 
     }
+
+    private fun sendComandService(action:String)=
+        Intent(this,TrackingService::class.java).also {
+            it.action=action
+            this.startService(it)
+        }
 
 
     //PERMISIONS SECTION****************************************************************************
@@ -105,6 +117,7 @@ class MainMapTrackActivity : AppCompatActivity(), EasyPermissions.PermissionCall
 
     }
 
+    //LIFECYCLE OF MAPVIEW**************************************************************************
     override fun onResume() {
         super.onResume()
         binding.mapView?.onResume()
@@ -134,7 +147,7 @@ class MainMapTrackActivity : AppCompatActivity(), EasyPermissions.PermissionCall
         super.onSaveInstanceState(outState, outPersistentState)
         binding.mapView?.onSaveInstanceState(outState)
     }
-    
+
 
 
 }
