@@ -3,9 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/Justrun2/app/src/main/res/drawable/ic_baseline_add_circle_outline_24.xml" value="0.2203125" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/Justrun2/app/src/main/res/drawable/ic_baseline_list_alt_24.xml" value="0.1" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/Justrun2/app/src/main/res/drawable/ic_run_directions.xml" value="0.12222222222222222" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/Justrun2/app/src/main/res/layout/activity_details.xml" value="0.22" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/Justrun2/app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/Justrun2/app/src/main/res/layout/activity_runs.xml" value="0.13802083333333334" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/Justrun2/app/src/main/res/layout/activity_runs.xml" value="0.25" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/Justrun2/app/src/main/res/layout/item_run.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/Justrun2/app/src/main/res/menu/toolbar_cancel_menu.xml" value="0.20416666666666666" />
       </map>
     </option>
   </component>

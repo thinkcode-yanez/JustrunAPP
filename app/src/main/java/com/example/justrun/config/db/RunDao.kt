@@ -11,7 +11,7 @@ import androidx.room.Query
 interface RunDao {
 
     @Insert
-     fun insertRun(run:Run) //suspend
+    suspend fun insertRun(run:Run) //suspend
 
     @Delete
     fun deleteRun(run:Run)
@@ -22,8 +22,12 @@ interface RunDao {
     @Query("DELETE FROM running_table WHERE id = :id")
     suspend fun deleteByID(id:Int)
 
+    @Query("SELECT * FROM running_table WHERE id = :id")
+    suspend fun selectByID(id:Int):Run
+
+
     @Query("SELECT * FROM running_table ORDER BY timestamp DESC") // ORDEN DESCENDENTE
-    fun getAllRunsByDate(): LiveData<List<Run>>
+    suspend fun getAllRunsByDate(): List<Run>
 
     @Query("SELECT * FROM running_table ORDER BY timeInMillis DESC") // ORDEN DESCENDENTE
     fun getAllRunsByTime(): LiveData<List<Run>>

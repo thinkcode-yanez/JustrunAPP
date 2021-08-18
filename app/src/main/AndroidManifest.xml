@@ -17,21 +17,28 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Justrun">
         <activity
-            android:name=".ui.RunsActivity"
+            android:name=".ui.DetailsActivity"
             android:exported="true" />
+        <activity
+            android:name=".ui.RunsActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.MainMapTrackActivity"
             android:exported="true"
-            android:launchMode="singleTop">
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <service
             android:name=".services.TrackingService"
             android:foregroundServiceType="location" />
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />

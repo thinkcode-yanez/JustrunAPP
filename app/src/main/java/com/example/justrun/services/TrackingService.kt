@@ -54,6 +54,7 @@ typealias Polylines = MutableList<Polyline>
 class TrackingService : LifecycleService() {
 
     var isFirstRun = true
+    var serviceKilled=false
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
     private var runTimeSeconds = MutableLiveData<Long>()
@@ -63,6 +64,7 @@ class TrackingService : LifecycleService() {
         var runTimeMillis = MutableLiveData<Long>()
         val isTracking = MutableLiveData<Boolean>()
         val pathPoints = MutableLiveData<Polylines>()
+        var flagData=false
 
     }
 
@@ -71,6 +73,7 @@ class TrackingService : LifecycleService() {
         pathPoints.postValue(mutableListOf())//Insertamos una lista en blanco pues no hay polilynes aun
         runTimeSeconds.postValue(0L)
         runTimeMillis.postValue(0L)
+
     }
 
     @SuppressLint("VisibleForTests")
@@ -85,6 +88,8 @@ class TrackingService : LifecycleService() {
         })
 
     }
+
+
 
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -102,17 +107,28 @@ class TrackingService : LifecycleService() {
 
                 }
                 ACTION_PAUSE_SERVICE -> {
-                    pauseService()
                     Log.d("Service", "Service paused")
+                    pauseService()
                 }
                 ACTION_STOP_SERVICE -> {
+
                     Log.d("Service", "Service stoped")
+                    killService()
                 }
                 else -> {
                 }
             }
         }
         return super.onStartCommand(intent, flags, startId)
+    }
+
+    private fun killService(){//METODO QUE RESETEA ALL DESPUES DE CANCELAR
+        serviceKilled=true
+        isFirstRun=true
+        pauseService()
+        postInitValues()
+        stopForeground(true)
+        stopSelf()
     }
 
     private var isTimerEnabled = false
@@ -196,6 +212,7 @@ class TrackingService : LifecycleService() {
                 last().add(pos)
                 pathPoints.postValue(this)
             }
+            flagData = true //Al menos un dato ya fue insertado en el mapa
         }
     }
 
