@@ -91,25 +91,29 @@ class MainMapTrackActivity : AppCompatActivity(), EasyPermissions.PermissionCall
 
         binding.btnToggleRun.setOnClickListener {
             isLocationEnabled()
-            if(gpsStatus) {
+            if (gpsStatus) {
                 startTheRun()
             }
         }
         binding.btnFinishRun.setOnClickListener {
 
-            if(TrackingService.flagData){
+            if (TrackingService.flagData) {
                 zoomWholeTrack()
                 finishRunAndSaveTheWholeData()
-            }else{
-                Toast.makeText(this, "Data not available to save.\n Start New Run or Wait.", Toast.LENGTH_SHORT)
+            } else {
+                Toast.makeText(
+                    this,
+                    "Data not available to save.\n Start New Run or Wait.",
+                    Toast.LENGTH_SHORT
+                )
                     .show()
 
             }
 
 
         }
-        binding.btnRUNS.setOnClickListener{
-            val intent=Intent(this,RunsActivity::class.java)
+        binding.btnRUNS.setOnClickListener {
+            val intent = Intent(this, RunsActivity::class.java)
             this.startActivity(intent)
         }
     }
@@ -151,13 +155,16 @@ class MainMapTrackActivity : AppCompatActivity(), EasyPermissions.PermissionCall
             .setMessage("Are you sure to cancel the current run and delete the data?")
             .setIcon(R.drawable.ic_baseline_delete_forever_24)
             .setPositiveButton("YES") { _, _ ->
+                binding.tvTimer.text="00:00:00:00"
+              //  binding.btnToggleRun.text="START"
                 stopRun()
-                val intent=Intent(this,RunsActivity::class.java)
+              //  binding.btnToggleRun.text="START"
+                map?.clear()
+                val intent = Intent(this, RunsActivity::class.java)
                 this.startActivity(intent)
 
 
-              //  binding.tvTimer.text="00:00:00:00"
-               // map?.clear()
+
 
             }
             .setNegativeButton("NO") { dialogInterface, _ ->
@@ -170,9 +177,9 @@ class MainMapTrackActivity : AppCompatActivity(), EasyPermissions.PermissionCall
     }
 
 
-
     private fun stopRun() {
-        binding.tvTimer.text="00:00:00:00"
+        binding.tvTimer.text = "00:00:00:00"
+        //binding.btnToggleRun.text="START"
         map?.clear()
         sendComandService(ACTION_STOP_SERVICE)
 
@@ -215,19 +222,19 @@ class MainMapTrackActivity : AppCompatActivity(), EasyPermissions.PermissionCall
     private fun updateTracking(isTracking: Boolean) {
         this.isTracking = isTracking
 
-        if (!isTracking && currenTimeMillis>0L) {
+        if (!isTracking && currenTimeMillis > 0L) {
             binding.btnToggleRun.text = "START"
             binding.btnFinishRun.visibility = View.VISIBLE
 
-        } else if(isTracking ) {
+        } else if (isTracking) {
             binding.btnToggleRun.text = "STOP"
             menu?.getItem(0)?.isVisible = true
-           binding.btnFinishRun.visibility = View.GONE
+            binding.btnFinishRun.visibility = View.GONE
         }
 
     }
 
-    private fun zoomWholeTrack(){
+    private fun zoomWholeTrack() {
         val bounds = LatLngBounds.builder()
 
         for (polilyne in pathPoints) {
@@ -245,6 +252,7 @@ class MainMapTrackActivity : AppCompatActivity(), EasyPermissions.PermissionCall
         )
 
     }
+
     private fun finishRunAndSaveTheWholeData() {
 
         map?.snapshot { bmp ->
@@ -256,7 +264,7 @@ class MainMapTrackActivity : AppCompatActivity(), EasyPermissions.PermissionCall
             //VALOR DE VELOCIDAD PROMEDIO OBTENIDO
             val avgSpeed =
                 round((distanceMts / 1000f) / (currenTimeMillis / 1000f / 60 / 60) * 10) / 10f
-           // round((distanceMts / 1000f) / (currenTimeMillis / 1000f / 60 / 60) * 10) / 10f //km/h
+            // round((distanceMts / 1000f) / (currenTimeMillis / 1000f / 60 / 60) * 10) / 10f //km/h
             //Valor de la Fecha
             val date = Calendar.getInstance().timeInMillis
 
@@ -267,7 +275,7 @@ class MainMapTrackActivity : AppCompatActivity(), EasyPermissions.PermissionCall
 
             Toast.makeText(this, "GOOD JOB, RUN SAVED SUCCESSFULLY", Toast.LENGTH_SHORT).show()
             stopRun()//Reiniciamos todas las variables
-            val intent=Intent(this,RunsActivity::class.java)
+            val intent = Intent(this, RunsActivity::class.java)
             this.startActivity(intent)// NOS VAMOS AL RUNS ACTIIVTY
 
         }
@@ -328,6 +336,7 @@ class MainMapTrackActivity : AppCompatActivity(), EasyPermissions.PermissionCall
             Toast.makeText(this, "Turn ON the GPS location", Toast.LENGTH_SHORT).show()
         }
     }
+
     private fun requestPermissions() {
         if (TrackingUtility.hasLocationPersmissions(this)) {
             return
@@ -379,7 +388,7 @@ class MainMapTrackActivity : AppCompatActivity(), EasyPermissions.PermissionCall
     override fun onResume() {
         super.onResume()
         binding.mapView?.onResume()
-        if(pathPoints.isEmpty()) {
+        if (pathPoints.isEmpty() ) {
             binding.btnFinishRun.isVisible = false
         }
     }
