@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 
 @Entity (tableName = "running_table")
 data class Run(
-   // var img: Bitmap? =null, //Se crea una class Coverter para manejar bitmap en Room. Check Converters
+    var img: Bitmap? =null, //Se crea una class Coverter para manejar bitmap en Room. Check Converters
     var timestamp: Long=0L,
     var avgSpeedKmh:Float=0F,
     var distanceMeters:Int=0,

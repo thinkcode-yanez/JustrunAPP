@@ -8,16 +8,14 @@ class MainRepository(
 
 ) {
 
-    fun insertRun(run: Run)= db.getRunDao().insertRun(run)
+    suspend fun insertRun(run: Run)= db.getRunDao().insertRun(run)
+    suspend fun getAllRunsByDate()=db.getRunDao().getAllRunsByDate()
+    suspend fun deleteByID(id:Int) = db.getRunDao().deleteByID(id)
+    suspend fun getById(id:Int)=db.getRunDao().selectByID(id)
 
     fun deleteRun(run: Run) = db.getRunDao().deleteRun(run)
 
-    suspend fun deleteByID(id:Int) = db.getRunDao().deleteByID(id)
-
     suspend fun getAll():List<Run> = db.getRunDao().getAll()
-
-    fun getAllRunsByDate()=db.getRunDao().getAllRunsByDate()
-
     fun getAllRunsByDistance()=db.getRunDao().getAllRunsByDistance()
 
     fun getAllRunsByTime()=db.getRunDao().getAllRunsByTime()

@@ -65,27 +65,14 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvTimer"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:orientation="horizontal"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="1">
+
             <Button
                 android:id="@+id/btnRUNS"
                 android:text="Your Runs"
-                android:layout_width="wrap_content"
+                android:textSize="11sp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"/>
-            <Button
-                android:id="@+id/btnTRACK"
-                android:text="New Run"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
-
-
-
+                android:layout_margin="10dp"/>
 
     </LinearLayout>
 
